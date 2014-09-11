@@ -51,7 +51,7 @@ public class BoardClass {
 		SqlSession session = sqlMapClient.getSqlSession();
 
 		
-		BoardBean boardList = session.selectOne("User.getBoardContent", idx);
+		Object boardList = session.selectOne("User.getBoardContent", idx);
 		
 		model.addAttribute("boardList", boardList);
 		
