@@ -1,5 +1,5 @@
-<jsp:include page="common/header.jsp"/>
 
+<%@ include file="common/header.jsp" %>
 <style>
 	.default_height{
 			line-height:20px;
@@ -13,10 +13,36 @@
 		padding-right:0px;
 	}
 	.boardListTitle{
-		font-size:35px;
+		font-size:20px;
 		font-weight:bold;
 		color:#eb0000;
-		background-color:#565656;
+		border-bottom:2px solid #565656;
+		
+	}
+	.boardListTitle div{
+		float:left;
+		display:inline-block;
+		text-align : center;
+		/*border-right:1px solid #565656;*/
+	}
+	.boardList{
+		font-size:15px;
+		font-weight:bold;
+		color:black;
+		border-bottom:1px solid #565656;
+	}
+	.boardList div{
+		float:left;
+		display:inline-block;
+		text-align : center;
+		/*border-right:1px solid #565656;*/
+		cursor:pointer;
+	}
+	a {
+		color : black;
+	}
+	a:hover{
+		color: #428bca;
 	}
 </style>
 
@@ -37,15 +63,51 @@
 		<div class="col-md-12 default_height"></div>
 	</div>
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8 boardListTitle text-center">
-			<c:forEach var="item" items="${boardTitleList}">
-	            <div>
-	                ${item}     
-	            </div>
-	        </c:forEach>
+		<div class="col-md-1"></div>
+		<div class="col-md-10 boardListTitle text-center">
+			<div class="col-md-1">
+				No.
+			</div>
+			<div class="col-md-6">
+				Title
+			</div>
+			<div class="col-md-2">
+				Name
+			</div>
+			<div class="col-md-1">
+				View
+			</div>
+			<div class="col-md-2">
+				Date
+			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 text-center boardList">
+		<c:forEach var="item" items="${boardList}">
+			<a href="./boardView?idx=${item.idx}">
+				
+		            <div class="col-md-1">
+		                ${item.idx}     
+		            </div>
+		            <div class="col-md-6">
+		                ${item.title}     
+		            </div>
+		            <div class="col-md-2">
+		                ${item.userName}     
+		            </div>
+		            <div class="col-md-1">
+		                ${item.view}     
+		            </div>
+		            <div class="col-md-2">
+		                ${item.regdate}     
+		            </div>
+	        </a>
+	    </c:forEach>
+	    </div>
+	    <div class="col-md-1"></div>
 	</div>
 </div>
 

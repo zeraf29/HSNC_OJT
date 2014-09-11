@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.spring.web.dao.BoardBean;
 import com.spring.web.dao.SqlMapClient;
 import com.spring.web.dao.UserBean;
 
@@ -18,27 +20,43 @@ public class BoardClass {
 	@RequestMapping(value = "/boardList", method = {RequestMethod.GET, RequestMethod.POST})
 	public String boardList(Locale locale, Model model){
 		
-		ArrayList<String> boardTitleList =new ArrayList<String>();
-		boardTitleList.add("No.");
-		boardTitleList.add("title");
-		boardTitleList.add("date");
+		
 		//String[] boardTitleList = {"No.","title","date"};
-		model.addAttribute("boardTitleList", boardTitleList);
 		
 		
-
-		/*
 		
 		SqlMapClient sqlMapClient = new SqlMapClient();
 		SqlSession session = sqlMapClient.getSqlSession();
+
 		
-		List<UserBean> list = session.selectList("User.getUser");
-		 System.out.println("여러개 뽑기 : ");
-	        for(UserBean u : list)
-	            System.out.println(u.getName());
+		List<BoardBean> boardList = session.selectList("User.getBoardList");
+		
+		model.addAttribute("boardList", boardList);
+		
 		session.close();
-		*/
 		
 		return "boardList";
+	}
+	
+	
+	@RequestMapping(value = "/boardView", method = {RequestMethod.GET, RequestMethod.POST})
+	public String boardView(Locale locale, Model model,@RequestParam("idx") int idx){
+		
+		
+		//String[] boardTitleList = {"No.","title","date"};
+		
+		//System.out.println(idx);
+		
+		SqlMapClient sqlMapClient = new SqlMapClient();
+		SqlSession session = sqlMapClient.getSqlSession();
+
+		
+		BoardBean boardList = session.selectOne("User.getBoardContent", idx);
+		
+		model.addAttribute("boardList", boardList);
+		
+		session.close();
+		
+		return "boardView";
 	}
 }

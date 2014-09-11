@@ -24,6 +24,7 @@
     <!-- sql 맵퍼 -->
     <mappers>
         <mapper resource="com/spring/web/sql/usersMybatis.xml" />
+        <mapper resource="com/spring/web/sql/boardMybatis.xml" />
     </mappers>
  
 </configuration>

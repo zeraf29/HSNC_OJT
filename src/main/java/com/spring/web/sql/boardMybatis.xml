@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="User">
+     
+ 
+     <select id="getBoardList" resultType="com.spring.web.dao.BoardBean">
+             SELECT ct.idx, ct.useridx as userIdx,users.name as userName,ct.title,ct.content,ct.view,date_format(ct.regdate,"%y-%m-%d %h:%m") as regdate
+             FROM contents as ct
+             LEFT JOIN users as users on users.idx = ct.useridx
+             ORDER BY ct.regdate DESC
+     </select>
+     
+     
+     <select id="getBoardContent" resultType="com.spring.web.dao.BoardBean">
+     		 SELECT ct.idx, ct.useridx as userIdx,users.name as userName,ct.title,ct.content,ct.view,date_format(ct.regdate,"%y-%m-%d %h:%m") as regdate
+             FROM contents as ct
+             LEFT JOIN users as users on users.idx = ct.useridx
+             WHERE ct.idx = #{idx}
+             ORDER BY ct.regdate DESC
+     </select>
+ </mapper>
